@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>箭头函数中this的使用</title>
+</head>
+
+<body>
+  <script>
+    // 什么时候使用箭头函数
+    // 把一个函数作为另一个函数的参数的时候会使用箭头函数
+    // setTimeout(() => {
+    //   console.log(this); //window
+    // })
+
+    // 字面量增强写法一般不用箭头函数
+    // 箭头函数中的this是一层层向外查找this，直到有this的定义
+    // 结论：箭头函数中的this引用的是最近作用域中的this
+    // const obj = {
+    //   aaa() { //这个函数中的this就是obj
+    //     setTimeout(function () {
+    //       console.log(this); //window
+    //     })
+
+    //     setTimeout(() => {
+    //       console.log(this); //obj对象
+    //     })
+    //   }
+    // }
+    // obj.aaa()
+
+    const obj = {
+      aaa() { //这个函数中的this就是obj
+        setTimeout(function () {
+          setTimeout(function () {
+            console.log(this); //window,function函数调用的时候会把window对象传进去
+          })
+
+          setTimeout(() => {
+            console.log(this); //window
+          })
+        })
+
+        setTimeout(() => {
+          setTimeout(function () {
+            console.log(this); //window
+          })
+
+          setTimeout(() => {
+            console.log(this); //obj对象，一层层往外找，函数作用域就是obj
+          })
+        })
+      }
+    }
+    obj.aaa()
+  </script>
+</body>
+
+</html>

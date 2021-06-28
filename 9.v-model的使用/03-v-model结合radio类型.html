@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-model结合radio类型</title>
+</head>
+
+<body>
+  <div id='app'>
+    <h2> {{message}} </h2>
+    <!-- 提交的时候是将name作为key提交的 -->
+    <!-- 单选互斥两种方式： 1.name相同 2.v-model绑定同一个变量 -->
+    <!-- 给sex设置值男或者女就会默认选中对应的 -->
+    <label for="male">
+      <input type="radio" id="male" value="男" v-model="sex">男
+    </label>
+    <label for="female">
+      <input type="radio" id="female" value="女" v-model="sex">女
+    </label>
+    <h2>选择的是： {{sex}} </h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello vue',
+        sex: '男'
+      }
+    })
+  </script>
+
+</body>
+
+</html>

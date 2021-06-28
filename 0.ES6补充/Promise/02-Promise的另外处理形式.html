@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise的另外处理形式</title>
+</head>
+
+<body>
+  <script>
+    // 不写catch，then中可以有两个参数，一个处理正确返回的数据，一个处理错误时返回的错误信息
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('hello')
+      }, 1000);
+    }).then(data => {
+      console.log(data);
+    }, err => {
+      console.log(err);
+    })
+  </script>
+</body>
+
+</html>

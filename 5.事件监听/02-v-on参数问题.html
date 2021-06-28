@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-on参数问题</title>
+</head>
+
+<body>
+  <div id='app'>
+    <h2> {{message}} </h2>
+    <!-- 1.事件调用的方法没用参数 -->
+    <!-- <button @click="btn1Click()">按钮1</button> -->
+    <button @click="btn1Click">按钮1</button>
+
+    <!-- 2.事件定义，写方法时省略了小括号，但是方法本身是需要一个参数的，这个时候vue会默认讲浏览器产生的event事件对象作为参数穿入到方法中 -->
+    <!-- <button @click="btn2Click(123)">按钮2</button> -->
+    <button @click="btn2Click">按钮2</button>
+
+    <!-- 没用省略小括号，但是没传参数，返回undefined -->
+    <!-- <button @click="btn2Click()">按钮2</button> -->
+
+    <!-- 3.在方法定义时，我们需要event对象，同时又需要其他参数 -->
+    <!-- 在调用方法时，如何手动的获取到浏览器参数的event对象：$event -->
+    <button @click="btn3Click(123,$event)">按钮3</button>
+
+    <!-- 这样写是把event传给abc了，event变成undefined返回了 -->
+    <!-- <button @click="btn3Click">按钮3</button> -->
+
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello vue'
+      },
+      methods: {
+        btn1Click() {
+          console.log('btn1Click');
+        },
+        btn2Click(event) { //什么时候需要event的时候，就把参数写上，然后省略小括号就能获取到当前事件了
+          console.log('btn2Click----------', event);
+        },
+        btn3Click(abc, event) {
+          console.log('btn3Click++++++++++', abc, event);
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>

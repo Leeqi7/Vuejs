@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise的基本使用</title>
+</head>
+
+<body>
+  <script>
+    /**
+     * 这里用一个定时器来模拟异步事件
+     * 假设下面的data是从网络上一秒后请求的数据
+     * console.log是对数据的处理方式
+     */
+    // 1. 使用定时器
+    // setTimeout(function () {
+    //   let data ='Hello World'
+    //   console.log(data);
+    // },1000)
+
+    // 2. 使用Promise 链式编程
+    /**
+     * Promise是一个类，用的时候先new一个对象，然后传入一个函数，这个函数包含两个参数这两个参数本身又是函数
+     * 当有网络请求的时候，就用Promise包裹起来，
+     * 然后传入要执行的函数，成功时调用resolve方法，就在.then()中处理，
+     * 失败时调用reject(传回的错误信息)，在.catch中执行
+     */
+    new Promise((resolve, reject) => {
+      // 第一次网络请求的代码
+      setTimeout(function () {
+        // 成功时调用
+        resolve('第一次网络请求的Hello World----就是拿到的数据data，传给then')
+        // 失败时调用
+        reject('Error Data---返回的错误信息，传给catch')
+      }, 1000)
+    }).then(data => {
+      // 第一次拿到结果的处理代码
+      console.log(data);
+      console.log('其他11111111 处理 Hello World');
+
+      return new Promise((resolve, reject) => {
+        // 第二次网络请求的代码
+        setTimeout(function () {
+          resolve('第二次网络请求的Hello vue')
+          reject('Error Data')
+        }, 1000)
+      })
+    }).then(data => {
+      // 第二次拿到结果的处理代码
+      console.log(data);
+      console.log('其他2222222222 Hello Vue');
+
+      return new Promise((resolve, reject) => {
+        // 第三次网络请求的代码
+        setTimeout(function () {
+          resolve('第三次网络请求的 Hello vue')
+          reject('Error Data')
+        }, 1000)
+      })
+    }).then(data => {
+      // 第三次拿到结果的处理代码
+      console.log(data);
+      console.log(' 其他处理 33333333 Hello JavaScript');
+    }).catch(error => {
+      console.log(error);
+    })
+  </script>
+</body>
+
+</html>

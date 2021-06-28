@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-bind动态绑定style对象语法</title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- <h2 :style="{key(属性名)：value(属性值)}"> {{message}} </h2> -->
+    <!-- 样式写法，驼峰（fontSize）或者短线加单引号（'font-size'） 50px如果不加单引号会当成边路报错 -->
+    <h2 :style="{fontSize:'30px'}"> {{message}} --驼峰样式写法 </h2>
+    <h2 :style="{'font-size':'30px'}"> {{message}} --短线连接写法</h2>
+    <!-- finalSize当成一个变量使用  数字类型和字符串连接的时候隐式转换为字符串类型-->
+    <h2 v-bind:style="{fontSize:finalSize +'px',color:finalColor}"> {{message}} --变量写法 </h2>
+    <h2 v-bind:style="getStyles()"> {{message}} --方法返回对象写法 </h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello vue',
+        finalSize: 30,
+        finalColor: 'pink'
+      },
+      methods: {
+        getStyles: function () {
+          return { fontSize: this.finalSize + 'px', color: this.finalColor }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-bind基本使用</title>
+</head>
+
+<body>
+  <div id='app'>
+    <h2> {{message}} </h2>
+    <!-- v-bind指令 动态绑定属性 加了v-bind将属性值默认为变量，并找到当前变量的值进行解析 -->
+    <img v-bind:src="imgURL" alt="">
+    <a v-bind:href="aHref">vuejs</a>
+    <!-- 语法糖 简写 -->
+    <br>
+    <img :src="imgURL" alt="">
+    <a :href="aHref">vuejs</a>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello vue',
+        imgURL: 'https://cn.vuejs.org/images/logo.png',
+        aHref: 'https://cn.vuejs.org'
+      }
+    })
+  </script>
+
+</body>
+
+</html>

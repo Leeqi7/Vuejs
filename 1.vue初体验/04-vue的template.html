@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>template</title>
+</head>
+<body>
+    <!-- 输入vue加回车，就能有以下模板了，添加模板，文件--首选项--用户片段  参考[vscode 添加代码片段（代码模板，注释模板等）](https://blog.csdn.net/weixin_40579884/article/details/97165221) -->
+    <div id="app">
+        {{message}}
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el:'#app',
+            data:{
+                message:'hello vue'
+            }
+        })
+    </script>
+</body>
+</html>

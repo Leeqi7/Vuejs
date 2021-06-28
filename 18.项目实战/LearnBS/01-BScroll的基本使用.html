@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BScroll的基本使用</title>
+  <style>
+    .wrapper{
+      height: 200px;
+      background-color: pink;
+
+      /* 原生滚动用法 */
+      overflow-y: scroll;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <ul class="content">
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li>
+      <li>列表数据</li><li>列表数据</li>
+    </ul>
+  </div>
+  <script src="./js/core.js"></script>
+  <script>
+    // 默认情况下BScroll是不可以实时监听滚动位置的,如果要监听，必须在创建的时候传入一些配置
+    // probetype 侦测，默认值是0,
+    // 0和1都不侦测实时位置
+    // 2是在手指滚动过程中侦测，手指离开的惯性不侦测
+    // 3 只要是滚动都侦测
+    // 属性click 
+    // 如果用bscroll管理content，其中有按钮，默认不监听这个按钮的点击
+
+    const bscroll = new BScroll('.wrapper',{
+      probeType:3
+    })
+
+    // 实时监听滚动的位置
+    bscroll.on('scroll',(position)=>{
+      console.log(position);
+    })
+  </script>
+</body>
+</html>

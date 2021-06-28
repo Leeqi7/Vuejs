@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>哪些数组的方法是响应式的</title>
+</head>
+
+<body>
+  <div id='app'>
+    <h2> {{message}} </h2>
+    <ul>
+      <li v-for="item in letters" :key="item"> {{item}} </li>
+    </ul>
+    <button @click="btnClick">按钮</button>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello vue',
+        letters: ['a', 'x', 'b', 'l', 'y', 'd', 'e', 'f']
+      },
+      methods: {
+        btnClick() {
+          //响应式 
+          //1. push() 方法 在数组末尾添加元素 可以添加一个或多个
+          // this.letters.push('aaa', 2212, this.message) //绑定的key会重复
+
+          //2. pop()方法 删除数组中最后一个元素（从后往前删除元素）
+          // this.letters.pop();
+
+          //3. shift() 方法 删除数组中第一个元素 （从前往后删除元素）
+          // this.letters.shift()
+
+          //4. unshift(...items:T[]) 方法 可变参数...  T泛型 ts语法 在数组最前面添加元素 可以添加一个或多个
+          // this.letters.unshift('aaa', 'fsf') //绑定的key会重复
+
+          /** 
+           * 5. splice(start, , ) 参数start从哪个个元素开始 作用： 删除元素/插入元素/替换元素
+           * 删除元素：第二个参数传入删除元素的个数，如果删除后面所有的不要不传参数，最好传入当前数组长度减去从第几个开始的数字
+           * this.letters.splice(1,2)
+           * 替换元素：第二个参数传入替换元素的个数，后面加上要传入的参数
+           * this.letters.splice(1,2,'777','asaa')
+           * 插入元素：第二个参数传入0，后面加上要插入的参数
+           * this.letters.splice(1,0,'777','asaa')
+           */
+
+          //6. sort()方法 对数组中的元素进行排序，也会影响原数组，默认会按照Unicode编码进行排序
+          // this.letters.sort()
+
+          // 7.reverse() 数组元素反转，顺序反转
+          // this.letters.reverse()
+
+          //非响应式
+          //通过索引值修改数组中的元素 vue内部没有监听这种方式
+          // this.letters[0] = 'dddd'
+          /**
+           * 解决方案:
+           * 1. splice()方法
+           *  this.letters.splice(0, 1, 'lllllll')
+           * 2. 响应式 vue内部实现的  set(要修改的对象，索引值，修改后的值)
+           *  Vue.set(this.letters, 0, 'bbbbbbbbbb')
+           */
+
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>

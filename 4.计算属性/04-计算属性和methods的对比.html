@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>计算属性缓存/计算属性和methods的对比</title>
+</head>
+
+<body>
+  <div id='app'>
+    <h2> {{message}} </h2>
+    <!-- 1.直接拼接：语法过于繁琐 -->
+    <h2> 直接拼接： {{firstName}}{{lastName}} </h2>
+    <!-- 2.通过定义methods，显示几次就几次调用方法，性能低 -->
+    <!-- <h2> 通过定义methods：{{getFullName()}} </h2>
+    <h2> 通过定义methods：{{getFullName()}} </h2>
+    <h2> 通过定义methods：{{getFullName()}} </h2>
+    <h2> 通过定义methods：{{getFullName()}} </h2>
+    <h2> 通过定义methods：{{getFullName()}} </h2> -->
+    <!-- 通过computed 多次调用，只调用一次计算属性-->
+    <h2> 通过computed：{{fullName}} </h2>
+    <h2> 通过computed：{{fullName}} </h2>
+    <h2> 通过computed：{{fullName}} </h2>
+    <h2> 通过computed：{{fullName}} </h2>
+    <h2> 通过computed：{{fullName}} </h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello vue',
+        firstName: '潇湘妃子',
+        lastName: '林黛玉'
+      },
+      methods: {
+        getFullName: function () {
+          console.log('getFullName');
+          return this.firstName + this.lastName
+        }
+      },
+      computed: {
+        fullName: function () {
+          console.log('fullName');
+          return this.firstName + this.lastName
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>

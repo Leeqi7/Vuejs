@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>箭头函数的基本使用</title>
+</head>
+
+<body>
+  <script>
+    // 1.参数问题
+    // 1.1 放入两个参数
+    const sum = (num1, num2) => {
+      return num1 + num2
+    }
+
+    // 1.2 放入一个参数，一个参数的时候小括号是省略的
+    // const power = (num) => {
+    const power = num => {
+      return num * num
+    }
+
+    // 2.函数中
+    // 2.1函数代码块中有多行代码时，正常写
+    const test=()=>{
+      // 1.打印hello
+      console.log('hello');
+
+      // 1.打印world
+      console.log('world');
+    }
+
+    // 2.2函数代码块中只有一行代码,自动执行这行代码且返回这行的返回值
+    // const mul = (num1,num2)=>{
+    //   return num1*num2
+    // }
+      const mul = (num1, num2) =>  num1 * num2
+  </script>
+</body>
+
+</html>

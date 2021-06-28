@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>es6模块化实现</title>
+</head>
+
+<body>
+  <!-- 加上type=module，表示这两个文件作为模块开发的，有单独的作用域，没有命名冲突 -->
+  <!-- 但是这个时候别的模块中是不能用别的模块中的内容的 -->
+  <!-- 如果要用的话需要用export导出 -->
+  <script src="aaa.js" type="module"></script>
+  <script src="bbb.js" type="module"></script>
+  <script src="mmm.js" type="module"></script>
+</body>
+
+</html>

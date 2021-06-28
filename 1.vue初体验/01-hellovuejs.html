@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue</title>
+    
+</head>
+<body>
+<div id="app">
+    <h2>{{message}}</h2>
+    <h3> {{name}} </h3>
+</div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        //es6 let（变量）/const（常量）
+        /**
+         * 编程范式：声明式编程
+         * 数据和界面完全分离
+         * 响应式：数据催动视图，只需要修改数据，不用修改html代码
+         */
+        /**
+         * 1. 创建vue实例，即vue对象
+         * 2. 创建vue对象的时候，传入一些options：{}
+         *  * {}中包含了 el 属性：该属性决定了这个vue对象挂载到哪一个元素上，即这个对象管理哪个元素，这里是挂载到（管理）id为app的元素上
+         *  * {}中包含了 data 属性：该属性中通常会存储一些数据
+         *      - 这些数据可以是我们直接定义出来的
+         *      - 也可以是来自网络，从服务器加载的，请求过来放在data中
+         * 3. 浏览器执行代码流程：
+         *  * 执行到11-14行显示对应的html
+         *  * 执行到script中创建vue实例，并且对原html进行解析和修改
+         * 4. 目前代码是可以做到响应式的：
+         *  * 在浏览器控制台中输入app.message就可以查看当前message的值，给它重新赋值，页面的数据就被刷新了
+         */
+        const app = new Vue({
+            el:'#app',//用于挂载要管理的元素
+            data:{ //定义数据
+                message:'你好啊，路星河',
+                name:'Lee'
+            }
+        })
+
+        
+        /**
+         * 原始js做法（编程范式：命令式编程）
+         * 1. 创建div元素，设置id属性
+         * 2. 定义一个变量 message
+         * 3. 将message变量放在前面的div元素中显示
+         * 4. 修改message的数据：
+         * 5. 将修改后的数据再次替换到div元素中
+        */
+    </script>
+</body>
+</html>

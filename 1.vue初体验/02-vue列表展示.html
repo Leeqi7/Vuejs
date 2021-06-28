@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue列表展示</title>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="item in books"> {{item}} </li>
+    </ul>
+</div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        /**
+         * v-for 循环指令，自动遍历item中的数据，创建li标签显示对应数据
+         * 响应式：在页面控制台 输入app.books可以查看当前数据，使用app.books.push('')即可添加新数据，页面自动发生改变
+         */
+        const app= new Vue({
+            el:'#app',
+            data:{
+                message:'hello',
+                books:['红楼梦','西游记','三国演义','水浒传']
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-on的修饰符</title>
+</head>
+
+<body>
+  <div id='app'>
+    <h2> {{message}} </h2>
+    <!-- 需求点击按钮的时候，只有按钮被点击，点击div的时候div被点击，阻止冒泡 -->
+    <div @click="divClick">
+      <h2> {{divmsg}} </h2>
+      <!-- 1.  .stop修饰符的使用 -->
+      <button @click.stop="btnClick">不冒泡</button>
+      <button @click="btnClick">冒泡</button>
+    </div>
+
+    <!-- 2. .prevent修饰符的使用 阻止一些默认行为 -->
+    <form action="baidu">
+      <!-- 阻止自动提交 -->
+      <input type="submit" value="提交" @click.prevent="submitClick">
+    </form>
+
+    <!-- 3. 监听某个键盘的键帽的点击 -->
+    <!-- <input type="text" @keyup="keyUp"> -->
+    <!-- 监听回车键 -->
+    <input type="text" @keyup.enter="keyUp">
+
+    <!-- 4. .once修饰符的使用 只触发一次回调 -->
+    <button @click.once="btn2Click">按钮2</button>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello vue',
+        divmsg: '天地玄黄'
+      },
+      methods: {
+        btnClick() {
+          console.log('btnClick');
+        },
+        divClick() {
+          console.log('divClick');
+        },
+        submitClick() {
+          console.log('submitClick');
+        },
+        keyUp() {
+          console.log('keyUp');
+        },
+        btn2Click() {
+          console.log('btn2Click');
+        },
+      }
+    })
+  </script>
+
+</body>
+
+</html>

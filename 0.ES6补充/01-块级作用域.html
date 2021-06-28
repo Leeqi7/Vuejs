@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button>按钮1</button>
+  <button>按钮2</button>
+  <button>按钮3</button>
+  <button>按钮4</button>
+  <button>按钮5</button>
+
+  <script>
+    /**
+     * ES5中的var是没有块级作用域的(if/for)
+     * ES6中的let是有块级作用域的(if/for)
+     * 
+     * ES5之前因为if和for都没有块级作用域的概念，所以很多时候，我们都必须借助于function的作用域来解决应用外面变量的问题
+     * ES6中，加入了let，let是有if和for的块级作用域的
+     */
+
+    /**
+     * 1. 变量作用域：变量在什么范围内是可用的
+     * 用var 定义一个变量
+     * 大括号是一个代码块，对变量作用范围没有限制
+     * 正常在代码块中定义的变量应该在代码块之外不能访问才是
+     */
+    // {
+    //   var name = 'lee'
+    //   console.log(name);
+    // }
+    // console.log(name);
+
+    /**
+     * 2. 没有块级作用域引起的问题：if块级
+     * 在if语句中定义一个变量，在if语句之外也能打印也能修改
+     * 在if语句之外定一个变量，在if中赋值为一个函数，打印name，在if内能调用这个函数，在if外也能调用
+     *
+     */
+    // var func
+    // if (true) {
+    //   var name = 'lee'
+    //   func =function () {
+    //     console.log(name);
+    //   }
+    //   func()
+    // }
+    // func()
+    // console.log(name);
+
+    /**
+     * 3.没有块级作用域引起的问题：for的块级
+     * 例子：监听多个按钮的点击，并且点击那个按钮的时候就打印哪个按钮被点击了
+     * 循环绑定监听事件
+     * 在使用之前i，在循环的时候已经被改变了
+     * 无论点击那个按钮结果都是第5个按钮被点击
+     * 闭包可以解决这个问题，因为函数是一个作用域
+     */
+
+    // var name = 'lee'
+    // function abc(bbb) { //bbb= 'lee'
+    //   console.log(bbb);
+    // }
+    // abc(name)
+    // name = 'kobe'
+
+    // var btns = document.getElementsByTagName('button')
+    // for (var i = 0; i < btns.length; i++) {
+    //   (function (num) {
+    //     btns[i].addEventListener('click', function () {
+    //       console.log('第' + num + '个按钮被点击');
+    //     })(i)
+    //   })
+    // }
+
+    const btns = document.getElementsByTagName('button')
+    for (let i = 0; i < btns.length; i++) {
+      btns[i].addEventListener('click', function () {
+        console.log('第' + i + '个按钮被点击');
+      })
+    }
+    //for循环相当于执行大括号中的方法五次，因为let有作用域，所以每个i相互独立，都有自己的值
+    //而es5没有作用域，同样是五次，后面的i的值会覆盖前面的i的值，for循环执行完之后i=5，五次的i的值都被改变了，只有一个值就是5
+    {
+      i = 0
+      btns[i].addEventListener('click', function () {
+        console.log('第' + i + '个按钮被点击');
+      })
+    }
+    {
+      i = 1
+      btns[i].addEventListener('click', function () {
+        console.log('第' + i + '个按钮被点击');
+      })
+    }
+    {
+      i = 2
+      btns[i].addEventListener('click', function () {
+        console.log('第' + i + '个按钮被点击');
+      })
+    }
+    {
+      i = 3
+      btns[i].addEventListener('click', function () {
+        console.log('第' + i + '个按钮被点击');
+      })
+    }
+    {
+      i = 4
+      btns[i].addEventListener('click', function () {
+        console.log('第' + i + '个按钮被点击');
+      })
+    }
+  </script>
+</body>
+
+</html>

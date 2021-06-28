@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button>按钮1</button>
+  <button>按钮2</button>
+  <button>按钮3</button>
+
+  <script>
+    /**
+     * 1.没有块级作用域引起的问题：for的块级
+     * 例子：监听多个按钮的点击，并且点击那个按钮的时候就打印哪个按钮被点击了
+     * 循环绑定监听事件
+     * 在使用之前i，在循环的时候已经被改变了
+     * 无论点击那个按钮结果都是第5个按钮被点击
+     * 闭包可以解决这个问题，因为函数是一个作用域
+     */
+
+    var btns = document.getElementsByTagName('button')
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener('click', function () {
+        console.log('第' + i + '个按钮被点击');
+      })
+    }
+    /** 
+     * 1. 情况一：ES5中没有使用闭包（错误的方式）
+     * 没有作用域，定义在大括号之内和大括号之外没什么分别，for循环每次i都会+1
+     * 执行回调函数的时候找i的值永远都是for循环执行之后的i的值，最后要结束循环，i=3
+     */
+    // i=2
+    // {
+    //   var i=0
+    //   btns[i].addEventListener('click', function () {
+    //     console.log('第' + i + '个按钮被点击');
+    //   })
+    // }
+    // var i=1
+    // {
+    //   btns[i].addEventListener('click', function () {
+    //     console.log('第' + i + '个按钮被点击');
+    //   })
+    // }
+    // var i=2
+    // {
+    //   btns[i].addEventListener('click', function () {
+    //     console.log('第' + i + '个按钮被点击');
+    //   })
+    // }
+
+    var btns = document.getElementsByTagName('button')
+    for (var i = 0; i < btns.length; i++) {
+      (function (i) {
+        btns[i].addEventListener('click', function () {
+          console.log('第' + i + '个按钮被点击');
+        })(i)
+      })
+    }
+    /**
+     * 2. 情况二：ES5中使用闭包
+     * 相当于定义了一个立即执行函数 (function(i){})(i)
+     * 有闭包的时候相当于把函数变成了三个代码块
+     * 函数中使用的是函数作用域中的i，与外面的i值更改无关
+     */
+    // i=3
+    // (function (i) { //i=0
+    //   btns[i].addEventListener('click', function () {
+    //     console.log('第' + i + '个按钮被点击');
+    // })(i)//i=0 传进去的i=0
+    // (function (i) { //i=1
+    //   btns[i].addEventListener('click', function () {
+    //     console.log('第' + i + '个按钮被点击');
+    // })(i)//i=1
+    // (function (i) { //i=2
+    //   btns[i].addEventListener('click', function () {
+    //     console.log('第' + i + '个按钮被点击');
+    // })(i)//i=2
+
+    const btns = document.getElementsByTagName('button')
+    for (let i = 0; i < btns.length; i++) {
+      btns[i].addEventListener('click', function () {
+        console.log('第' + i + '个按钮被点击');
+      })
+    }
+    /**
+     * 3. 情况三： 使用let
+     * 第一次i=0把i的值赋给第一个代码块中的i
+     * 第二次括号外的i=1，赋值给了第二个代码块中的i，第一个不变
+     * 即for循环一次产生块级作用域
+     */
+    // i=0
+    // {
+    //   i = 0
+    //   btns[i].addEventListener('click', function () {
+    //     console.log('第' + i + '个按钮被点击');
+    //   })
+    // }
+    // {
+    //   i = 1
+    //   btns[i].addEventListener('click', function () {
+    //     console.log('第' + i + '个按钮被点击');
+    //   })
+    // }
+    // {
+    //   i = 2
+    //   btns[i].addEventListener('click', function () {
+    //     console.log('第' + i + '个按钮被点击');
+    //   })
+    // }
+  </script>
+</body>
+
+</html>

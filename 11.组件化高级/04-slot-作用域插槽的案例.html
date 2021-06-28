@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>slot-作用域插槽的案例</title>
+</head>
+
+<body>
+  <div id='app'>
+    <h2> {{message}} </h2>
+    <cpn></cpn>
+    <cpn>
+      <!-- 获取子组件中的数据  下面两种都可以,v-slot是现在的官方用法，slotPros是任意起的别名-->
+      <!-- <template slot-scope="slotProps"> -->
+      <template v-slot:default="slotProps">
+        <span v-for="item in slotProps.data">
+          {{item}}-
+        </span><br>
+        <!-- join将数组转换为字符串，元素用 - 连接 -->
+        <span>{{slotProps.data.join(' - ')}}</span><br>
+        <span>{{slotProps.name1}}</span>
+      </template>
+    </cpn>
+    <cpn></cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <!-- data可以任意起，但是只能小写 -->
+      <slot :data="pLanguages" :name1="name1">
+        <ul>
+          <li v-for="item in pLanguages"> {{item}} </li>
+        </ul>
+      </slot>
+    </div>
+  </template>
+
+  <script src='../js/vue.js'></script>
+  <script>
+    // 父组件替换插槽的标签，但是内容由子组件来提供
+    /**
+     * 需求：子组件中包括一组数据
+     * 需要在多个界面进行展示：某些界面是以水平方向展示的，某些界面是以列表形式展示的，某些界面直接展示一个数组
+     * 内容在子组件中，希望父组件来展示
+     * 利用slot作用域插槽
+     */
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello vue'
+      },
+      components: {
+        cpn: {
+          template: '#cpn',
+          data() {
+            return {
+              pLanguages: ['JavaScript', 'C#', 'Go', 'Python', 'C++', 'C', 'java', 'php'],
+              name1: 'lee'
+            }
+          }
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>

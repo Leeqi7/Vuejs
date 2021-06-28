@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计数器</title>
+</head>
+<body>
+    <div id="app">
+        <h2>当前计数：{{counter}} </h2>
+        <!-- <button v-on:click="counter++">+</button> -->
+        <!-- <button v-on:click="counter--">-</button> -->
+        <button v-on:click="add">+</button>
+        <button v-on:click="sub">-</button>
+        <!-- 下面是语法糖写法 -->
+        <!-- <button @click="add">+</button> -->
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        /**
+         * 计数器需求：点击 + 按钮，计数器+1；点击 - 按钮，计数器-1
+         * v-on绑定事件：v-on:事件名="函数名" 
+         * Vue对象中新的属性，methods ，在Vue对象中定义方法
+         * 语法糖：简写 @click == v-on:click="方法名" 该指令监听某个元素的点击事件，并且需要指定当发生点击时，执行的方法
+         * this 指当前对象
+         */
+        const obj = {
+                counter:0
+
+            }
+        const app = new Vue({
+            el: '#app',
+            data: obj,
+            methods: {
+                add: function(){
+                    console.log('add被执行');
+                    //this指当前对象即app
+                    this.counter++
+                },
+                sub: function(){
+                    console.log('sub被执行');
+                    this.counter--
+                }
+            },
+            //calhook回调函数，钩子函数，官方提供的生命周期函数，绿色是vue自动完成的，红色部分是我们需要实现的函数
+            created:function() {
+                console.log('created');
+                //这里坐一些网络请求
+            },
+            mounted:function(){
+                console.log('mounted');
+            }
+        })
+
+        /**
+         * 原始js做法
+         * 1. 取到button元素
+         * 2. 添加监听事件
+         */
+    </script>
+</body>
+</html>
