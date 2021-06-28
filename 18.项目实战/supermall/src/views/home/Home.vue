@@ -3,20 +3,22 @@
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
-    <scroll class="content">
+    <scroll class="content" ref="scroll">
       <home-swiper :banners="banners"></home-swiper>
       <recommend-view :recommends="recommends"></recommend-view>
       <feature-view></feature-view>
       <tab-control class="tab-control" :titles="['流行', '新款', '精选']" @tabClick="tabClick"></tab-control>
       <goods-list :goods="showGoods"></goods-list>
     </scroll>
+    <back-top @click.native="backClick"></back-top>
   </div>
 </template>
 
 <script>
 // 导入的公共组件
-import NavBar from 'components/common/navvar/NavBar.vue';
+import NavBar from 'components/common/navbar/NavBar.vue';
 import Scroll from 'components/common/scroll/Scroll.vue';
+import BackTop from 'components/common/backTop/BackTop.vue';
 import TabControl from 'components/content/tabControl/TabControl.vue';
 import GoodsList from 'components/content/goods/GoodsList.vue';
 
@@ -33,6 +35,7 @@ export default {
     components: {
         NavBar,
         Scroll,
+        BackTop,
         TabControl,
         GoodsList,
 
@@ -88,6 +91,10 @@ export default {
             //         this.currentType = 'sell';
             //         break;
             // }
+        },
+        backClick(){
+            console.log('返回顶部组价点击');
+            this.$refs.scroll.scrollTo(0,0,500)
         },
         /**
          * 网络请求相关方法

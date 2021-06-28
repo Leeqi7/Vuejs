@@ -42,7 +42,11 @@ export default {
             click: true, //允许点击
         });
     },
-    methods: {},
+    methods: {
+      scrollTo(x,y,time=300){
+        this.scroll.scrollTo(x,y,time)
+      }
+    },
     watch: {},
 };
 </script>
